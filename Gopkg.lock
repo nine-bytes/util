@@ -7,23 +7,9 @@
   revision = "06ea1031745cb8b3dab3f6a236daf2b0aa468b7e"
   version = "v3.2.0"
 
-[[projects]]
-  name = "golang.org/x/text"
-  packages = [
-    "encoding",
-    "encoding/internal",
-    "encoding/internal/identifier",
-    "encoding/simplifiedchinese",
-    "internal/gen",
-    "transform",
-    "unicode/cldr"
-  ]
-  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
-  version = "v0.3.0"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "0bc09d2bcd98c5a5db5c77ce2e645c891148b0f0c1731e4bc3ec2f701b0c04d3"
+  inputs-digest = "04a2e75d7414419991125daf2ac2bf2644bd74c07ffd53b142d2b8073f8f2565"
   solver-name = "gps-cdcl"
   solver-version = 1
