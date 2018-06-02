@@ -16,6 +16,34 @@ func NewRegistry() *Registry {
 	}
 }
 
+func (r *Registry) All(f func(key, value interface{})) {
+	r.RLock()
+	defer r.RUnlock()
+
+	wg := new(sync.WaitGroup)
+	wg.Add(len(r.elems))
+	for key, value := range r.elems {
+		go func(key, value interface{}) {
+			f(key, value)
+			wg.Done()
+		}(key, value)
+	}
+	wg.Wait()
+}
+
+func (r *Registry) Each(f func(key, value interface{}, stop *bool)) {
+	r.RLock()
+	defer r.RUnlock()
+
+	stop := false
+	for key, value := range r.elems {
+		if !stop {
+			return
+		}
+		f(key, value, &stop)
+	}
+}
+
 func (r *Registry) Get(id interface{}) (interface{}, bool) {
 	r.RLock()
 	defer r.RUnlock()

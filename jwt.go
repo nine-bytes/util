@@ -23,7 +23,7 @@ const (
 	PS512 = "PS512"
 )
 
-func MethodStr2Obj(str string) (obj jwt.SigningMethod) {
+func SigningMethodStr2Obj(str string) (obj jwt.SigningMethod) {
 	switch strings.ToUpper(str) {
 	case HS256:
 		return jwt.SigningMethodHS256

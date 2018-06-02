@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-var length = 6
+var length = 24
 var num = 10
 
 func TestRandId(t *testing.T) {
