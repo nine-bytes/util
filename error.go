@@ -4,17 +4,33 @@ import (
 	"fmt"
 )
 
-type CodeError struct {
+type codeError struct {
 	Code int    `json:"code"`
 	Text string `json:"text"`
 }
 
-func NewCodeError(code int, text string) *CodeError {
-	return &CodeError{Code: code, Text: text}
+type CodeError interface {
+	ErrCode() int
 }
 
-func (ce *CodeError) Error() string {
+func EmptyCodeErr() CodeError {
+	return new(codeError)
+}
+
+func NewCodeError(code int, format string, a ...interface{}) CodeError {
+	return &codeError{Code: code, Text: fmt.Sprintf(format, a...)}
+}
+
+func (ce *codeError) ErrCode() int {
+	return ce.Code
+}
+
+func (ce *codeError) String() string {
 	return fmt.Sprintf("error code: %d error text: %s", ce.Code, ce.Text)
+}
+
+func (ce *codeError) Error() string {
+	return ce.Text
 }
 
 // Runs the given function and converts any panic encountered while doing so
